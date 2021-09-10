@@ -1,0 +1,25 @@
+<div class="floor">
+	<div class="floor__top">
+		<div class="floor__title-section">
+			<div class="floor__title">
+				{{ floor?.name }}
+			</div>
+			<div class="floor__title-label">
+				Managed by Smart Infrastructure
+			</div>
+			<div class="floor__number">
+				Floor number:
+				<div class="floor__number--white">{{ floor?.number }}</div>
+			</div>
+		</div>
+		<div class="floor__buttons-section">
+			<button class="button button--ghost button--medium" (click)="goToFloor()">
+				<span class="icon icon--gold icon--size-16px icon icon--open-in-new-tab mr-1 mr-1"></span>
+				Go To Floor
+			</button>
+		</div>
+	</div>
+	<div class="floor__map" *ngIf="floor">
+		<ai-infrastructure-map #map [floor]="floor" [mapContainerStyles]="getDashboardInfrastructureMapStyles()"></ai-infrastructure-map>
+	</div>
+</div>

@@ -1,0 +1,64 @@
+<div class="structure">
+	<div class="structure__left-container left">
+		<div class="left__top">
+			<div class="left__section mb--24">
+				<div class="left__title">Device Structure</div>
+				<div class="left__create-section" (click)="openCreateMenu($event)">
+					Create
+					<span class="icon icon--arrow-drop-down icon--black ml-auto"></span>
+				</div>
+				<div 	class="left__create-dropdown" aiClickOutside
+							(clickedOutside)="isCreateMenuOpen = false" 
+							*ngIf="isCreateMenuOpen">
+					<div class="left__create-item" (click)="newDeiceForm()">
+						<span class="icon icon--shapes icon--gold icon--size-16px mr--8"></span>
+						Add device
+					</div>
+					<div class="left__create-item left__create-item--disabled">
+						<span class="icon icon--shapes icon--gold icon--size-16px mr--8"></span>
+						Add robot
+					</div>
+					<div class="left__create-item left__create-item--disabled">
+						<span class="icon icon--shapes icon--gold icon--size-16px mr--8"></span>
+						Add group
+					</div>
+				</div>
+			</div>
+			<div class="left__section mb--16">
+				<div class="search-container search-container--outlined"
+           [class.search-container--filled]="search?.value?.length">
+        <input type="search"
+               placeholder="Search"
+               class="search-container__input"
+               #search>
+        <div class="search-container__button icon icon--search icon--size-16px"></div>
+        <div class="search-container__button icon icon--close icon--dynamic icon--size-16px"
+             (click)="search.value = null"></div>
+      </div>
+			</div>
+		</div>
+		<div class="left__systems systems">
+				<ai-systems-list [systems]="activeSystems"></ai-systems-list>
+				<label *ngIf="archivedSystems?.length" class="left__archived-label">
+					Archived
+				</label>
+				<ai-systems-list [archived]="true" [systems]="archivedSystems"></ai-systems-list>
+		</div>
+	</div>
+	<div class="structure__right-container">
+		<!-- <ai-complex-list></ai-complex-list> -->
+
+		<ai-device-details *ngIf="showDeviceDetails"></ai-device-details>
+
+		<ai-infrastructure-details *ngIf="showInfrastructureDetails && referenceType === refType.INFRASTRUCTURE"></ai-infrastructure-details>
+		
+		<ai-floor-details *ngIf="showInfrastructureDetails && referenceType === refType.FLOOR"></ai-floor-details>
+
+		<ai-station-details *ngIf="showInfrastructureDetails && referenceType === refType.STATION"></ai-station-details>
+		
+	</div>
+</div>
+
+<div *ngIf="loading" class="loading-container">
+	<ai-loading></ai-loading>
+</div>

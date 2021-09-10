@@ -1,0 +1,36 @@
+<div #masterContainer>
+	<div 	*ngFor="let system of systems; let i = index"
+				#currentElementRef
+				class="system"
+				[class.system--main]="!system?.parent && !system?.isDevice"
+				[class.system--archived]="archived">
+		<div 	class="system__name"
+					[class.system__name--main-system]="!system?.parent && !system?.isDevice"
+					[class.pl-2]="system?.isDevice && !system?.controllerDevices?.length"
+					[class.system__name--active]="activeItem?._id === system?._id"
+					(click)="system?.children?.length || system?.controllerDevices?.length ? openChildren(system) : system?.isDevice ? chooseDevice(system) : chooseSystem(system)">
+			<div class="system__structure-hr-line" *ngIf="system?.parent || system?.isDevice"></div>
+			<div 	class="system__structure-vr-line" [style.height.px]="masterContainer?.offsetHeight - 10"
+						*ngIf="isElementLast(i, (systems.length - 1))"></div>
+			<span class="system__arrow-icon icon icon--arrow-drop-down mr-1" 
+						*ngIf="system?.children?.length || system?.controllerDevices?.length"
+						[class.system__arrow-icon--rotate]="isChildrenVisible && activeSystem?._id === system?._id"></span>
+			<span class="icon icon--size-16px mr-1"
+						[class.icon--shapes]="!system?.referenceType && !system?.isDevice"
+						[class.icon--floor]="system?.referenceType === 'FLOOR'"
+						[class.icon--station]="system?.referenceType === 'STATION'"
+						[class.icon--company]="system?.referenceType === 'INFRASTRUCTURE'"
+						[class.icon--device]="system?.isDevice"
+						*ngIf="system?._id !== 'UNASSIGNED'"></span>
+			<span class="system__name-container" [class.system__name-container--device]="system?.isDevice">
+				{{ system?.reference?.name ? system?.reference?.name : system?.name }}
+			</span>
+		</div>
+		<div class="system__children" *ngIf="system?.children && isChildrenVisible && activeSystem?._id === system?._id">
+			<ai-systems-list [systems]="system?.children" [parentElem]="currentElementRef" ></ai-systems-list>
+		</div>
+		<div class="system__children" *ngIf="system?.controllerDevices?.length && isChildrenVisible && activeSystem?._id === system?._id">
+			<ai-systems-list [systems]="system?.controllerDevices" [parentElem]="currentElementRef"></ai-systems-list>
+		</div>
+	</div>
+</div>

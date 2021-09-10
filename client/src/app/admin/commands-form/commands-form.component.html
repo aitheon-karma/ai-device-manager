@@ -1,0 +1,53 @@
+<ng-template #commandsModal>
+  <div class="modal-header reject__header">
+    <div class="d-flex flex-column w-100">
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="modal-title pull-left position-relative">
+          Add command
+        </h4>
+        <div class="icon icon--close icon--dynamic"
+             (click)="closeModal($event)"></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+		<form [formGroup]="commandForm">
+      <div class="modal-body__section">
+        <label>Name</label>
+        <div class="input-wrap input-wrap--contained input-wrap--small">
+          <input class="input-wrap__input" placeholder="Enter name" formControlName="name">
+        </div>
+			</div>
+			<div class="modal-body__section">
+        <label>Command code</label>
+        <div class="input-wrap input-wrap--contained input-wrap--small">
+          <input class="input-wrap__input" placeholder="Enter code" formControlName="code">
+        </div>
+			</div>
+      <div class="modal-body__section">
+        <label>Description</label>
+        <div  class="textarea-wrap textarea-wrap--contained">
+          <textarea class="textarea-wrap__textarea"
+                    placeholder="Enter description"
+                    formControlName="description"
+                    rows="4" maxlength="300"></textarea>
+          <span class="textarea-wrap__counter">
+            {{ commandForm.get('description').value.length || 0 }}/300
+          </span>  
+        </div>
+      </div>
+    </form>
+	</div>
+	<div class="modal-footer">
+		<div class="modal-footer__buttons-container   justify-content-end">
+			<button class="button button--medium button--ghost"
+							(click)="closeModal($event)">
+				Cancel
+			</button>
+			<button class="button button--medium button--contained ml-2" type="button">
+				Add
+			</button>
+		</div>
+	</div>
+  <!-- <div class="loading-container" *ngIf="loading"></div> -->
+</ng-template>

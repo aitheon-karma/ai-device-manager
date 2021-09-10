@@ -1,0 +1,55 @@
+<ng-template #modalTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Gamepad mapping</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="list-group">
+      <div class="list-group-item" *ngFor="let item of controls; let i = index">
+        <i class="fa fa-check-circle text-success" *ngIf="item.index > -1"></i>
+        {{ item.name }} <br>
+        
+        <div class="row" *ngIf="item.type === 'axes' && currentControlIndex === i">
+            <hr style="width: 100%;">
+          <div class="col">
+            <div class="form-group">
+              <label for="center">Center</label>
+              <input type="number" [(ngModel)]="item.center" class="form-control" id="center" aria-describedby="center"
+                placeholder="">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="deadband">Deadband</label>
+              <input type="number" [(ngModel)]="item.deadband" class="form-control" id="deadband"
+                aria-describedby="deadband" placeholder="">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="min">Min</label>
+              <input type="number" [(ngModel)]="item.min" class="form-control" id="min" aria-describedby="min"
+                placeholder="">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="max">Max</label>
+              <input type="number" [(ngModel)]="item.max" class="form-control" id="max" aria-describedby="max"
+                placeholder="">
+            </div>
+          </div>
+        </div>
+        <small class="text-primary" *ngIf="currentControlIndex === i">{{ item.helpText }}</small>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" (click)="reset()">Reset</button>
+    <button class="btn btn-primary" [disabled]="!(currentControlIndex > controls.length - 1)" (click)="save()">Save &
+      Continue</button>
+  </div>
+</ng-template>

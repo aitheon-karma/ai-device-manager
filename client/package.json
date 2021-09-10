@@ -1,0 +1,36 @@
+{
+  "name": "ai-device-manager",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build --aot",
+    "build:prod": "$(npm bin)/ng build --aot --prod --base-href /device-manager/ && npm run docs",
+    "watch": "ng build --watch=true --aot",
+    "test": "ng test",
+    "lint": "ng lint ai-device-manager --fix",
+    "e2e": "ng e2e",
+    "lib:watch": "$(npm bin)/ng build @aitheon/device-manager --watch",
+    "lib:version": "cd projects/aitheon/device-manager && npm version minor",
+    "lib:build": "$(npm bin)/ng build @aitheon/device-manager",
+    "lib:publish": "npm run lib:build && npm publish dist/aitheon/device-manager",
+    "docs": "npm run typedoc -- --options typedoc.json --exclude '**/*.spec.ts' ./projects/",
+    "typedoc": "typedoc"
+  },
+  "private": true,
+  "dependencies": {
+    "@aitheon/core-client": "9.1.70",
+    "@aitheon/orchestrator": "0.5.0",
+    "@aitheon/smart-infrastructure": "0.91.0",
+    "@aitheon/creators-studio": "0.46.0",
+    "@aitheon/system-graph": "0.104.0",
+    "@angular/google-maps": "^9.2.4",
+    "@types/simple-peer": "^9.6.0",
+    "ngx-avatar": "^4.0.0",
+    "simple-peer": "^9.7.2",
+    "xterm": "4.8.1",
+    "xterm-addon-attach": "0.6.0",
+    "xterm-addon-fit": "0.4.0"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,159 @@
+.admin {
+	padding-top: 24px;
+
+	&__top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__title {
+		color: #fff;
+		font-size: 24px;
+		letter-spacing: 0px;
+		line-height: 32px;
+	}
+
+	&__tabs {
+		display: flex;
+		width: 100%;
+		margin-top: 16px;
+		padding: 0 16px;
+		border-bottom: 1px solid #454545;
+	}
+
+	&__tab {
+		position: relative;
+    padding: 12px 0 10px;
+    margin-right: 30px;
+		color: #7e7e7e;
+		font-size: 14px;
+		letter-spacing: 0.2px;
+		line-height: 20px;
+		border-bottom: 2px solid transparent;
+		cursor: pointer;
+		
+		&--active {
+			border-bottom: 2px solid #dcbc65;
+    	color: #dcbc65;
+		}
+	}
+
+	&__main-container {
+		min-height: fit-content;
+		max-height: calc(100vh - 214px);
+		margin-top: 8px;
+		border-radius: 2px;
+	}
+	
+	&__list {
+
+		&--empty {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 300px;
+			font-size: 14px;
+			color: #7e7e7e;
+			letter-spacing: 0.2px;
+		}
+	}
+}
+
+.data-list {
+
+	&--system-type {
+
+		.data-list__serial {
+			width: 160px;
+			min-width: 160px;
+		}
+
+		.data-list__name {
+			width: 297px;
+			min-width: 297px;
+		}
+
+		.data-list__description {
+			width: 283px;
+			min-width: 283px;
+		}
+
+		.data-list__creator {
+			width: 220px;
+			min-width: 220px;
+		}
+
+		.data-list__date {
+			width: 180px;
+			min-width: 180px;
+		}
+
+	}
+
+	&__head {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    border-bottom: 1px solid #454545;
+    cursor: default;
+  }
+
+  &__head-item {
+    padding: 12px;
+    color: #7e7e7e;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    line-height: 20px;
+  }
+
+  &__table {
+    max-height: calc(100vh - 312px);
+    overflow-y: scroll;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+		width: 100%;
+    font-size: 14px;
+		line-height: 36px;
+		letter-spacing: 0;
+		transition: .1s ease-in-out;
+		cursor: default;
+		
+		.icon--edit {
+			opacity: 0;
+			visibility: hidden;
+		}
+
+    &:nth-child(even) {
+      background: #2b2b2b;
+    }
+
+    &:hover {
+      background: #383838;
+      transition: .1s ease-in-out;
+
+      .tasks-list__task-action {
+        opacity: 1;
+        transition: .2s ease-in-out;
+			}
+			
+			.icon--edit {
+				opacity: 1;
+				visibility: visible;
+			}
+    }
+	}
+	
+	&__item-section {
+		padding: 0 12px;
+	}
+
+	&__actions {
+		display: flex;
+	}
+}

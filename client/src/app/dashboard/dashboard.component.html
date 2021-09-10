@@ -1,0 +1,71 @@
+<div class="dashboard">
+	<div class="dashboard__top">
+		<div class="dashboard__apps-dropdown apps-dropdown">
+			<div class="apps-dropdown__selected-app"
+					 aiClickOutside
+					 (clickedOutside)="isAppsDropdownOpened = false"
+					 (click)="toggleAppsDropdown()">
+					{{ selectedApplication?.project?.name || 'Dashboard' }}
+					<div class="icon icon--white icon--arrow-drop-down"
+							 [class.icon--rotate-180]="isAppsDropdownOpened"></div>
+
+					<div class="applications-list"
+							 [class.applications-list--opened]="isAppsDropdownOpened"
+							 [class.applications-list--closed]="!isAppsDropdownOpened">
+							<div class="applications-list__item"
+									 [class.applications-list__item--selected]="selectedApplicationId === app.graphNodeId"
+									 *ngFor="let app of applications"
+									 (click)="selectApplication(app)">
+									{{ app?.project?.name }}
+							</div>
+							<div class="applications-list__item applications-list__item--create-dashboard"
+									 (click)="openApplicationsFlowModal()">
+									<span class="icon icon--gold icon--plus icon--size-16px"></span>
+									create dashboard
+							</div>
+					</div>
+			</div>
+	</div>
+	<button class="button button--ghost button--small button--core-container"
+					(click)="goToCore()">
+		<span class="button--core">
+			<span class="icon icon--size-16px service-icon system_graph"></span>
+			Open core
+		</span>
+	</button>
+	</div>
+	<ng-container *ngIf="!isLoading">
+		<div class="dashboard__main-container" *ngIf="!selectedApplication; else appView">
+			<div class="dashboard__create-dashboard-app"
+				 (click)="openApplicationsFlowModal()">
+				<span class="icon icon--plus icon--gold mb--8"></span>
+				Create Dashboard App
+			</div>
+		</div>
+		<ng-template #appView>
+			<div class="dashboard__application-container mt--16"
+				 *ngIf="applications?.length">
+				<ai-application-dashboard [graphURL]="graphUrl"
+										  *ngFor="let app of [selectedApplication]"
+										  (applicationRemove)="onDeleteDashboardApplication($event)"
+										  (deployNode)="deployApplication($event)"
+										  [allowCollapse]="false"
+										  [application]="app"
+										  (applicationEdited)="onEditDashboardApp()">
+				</ai-application-dashboard>
+			</div>
+		</ng-template>
+	</ng-container>
+</div>
+
+<ai-loading class="loading-container" *ngIf="isLoading"></ai-loading>
+
+<ai-core-automate-modal></ai-core-automate-modal>
+
+<ai-core-create-node-modal (createdNode)="onCreateNode($event)"></ai-core-create-node-modal>
+
+<ai-core-add-application-modal (applicationsAdded)="deployDashboardApplications($event)"></ai-core-add-application-modal>
+
+<ai-core-request-modal></ai-core-request-modal>
+
+<ai-build-status></ai-build-status>

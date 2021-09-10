@@ -1,0 +1,58 @@
+<ng-template #systemTypeModal>
+  <div class="modal-header reject__header">
+    <div class="d-flex flex-column w-100">
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="modal-title pull-left position-relative">
+          Add system type
+        </h4>
+        <div class="icon icon--close icon--dynamic"
+             (click)="closeModal($event)"></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="systemTypeForm">
+      <div class="modal-body__section">
+        <label [class.text-danger]="submitted && systemTypeForm.get('name').hasError('required')">
+          Name {{ submitted && systemTypeForm.get('name').hasError('required') ? 'is required' : ''}}
+        </label>
+        <div  class="input-wrap input-wrap--contained input-wrap--small"
+              [class.input-wrap--error]="submitted && systemTypeForm.get('name').hasError('required')">
+          <input class="input-wrap__input" placeholder="Enter name" formControlName="name">
+        </div>
+      </div>
+      <div class="modal-body__section">
+        <label>Description</label>
+        <div  class="textarea-wrap textarea-wrap--contained">
+          <textarea class="textarea-wrap__textarea"
+                    placeholder="Enter description"
+                    formControlName="description"
+                    rows="4" maxlength="300"></textarea>
+          <span class="textarea-wrap__counter">
+            {{ systemTypeForm?.get('description')?.value?.length || 0 }}/300
+          </span>  
+        </div>
+      </div>
+      <div class="modal-body__section mb-0">
+        <label>Commands:</label>
+        <ng-select class="dropdown dropdown--contained dropdown--medium" [searchable]="false" [placeholder]="'Select commands'" formControlName="commands"></ng-select>
+      </div>
+    </form>
+    </div>
+    <div class="modal-footer">
+      <div class="modal-footer__buttons-container justify-content-end">
+        <button class="button button--medium button--ghost button--error mr-auto"
+                (click)="removeSystemType()" *ngIf="systemType">
+          Remove
+        </button>
+        <button class="button button--medium button--ghost"
+                (click)="closeModal($event)">
+          Cancel
+        </button>
+        <button class="button button--medium button--contained ml-2" (click)="onSubmit()">
+          {{ systemType ? 'Update' : 'Add' }}
+        </button>
+      </div>
+    </div>
+  <!-- <div class="loading-container" *ngIf="loading"></div> -->
+</ng-template>

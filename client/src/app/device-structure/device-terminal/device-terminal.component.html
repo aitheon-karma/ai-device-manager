@@ -1,0 +1,13 @@
+<div class="terminal">
+	<div class="terminal__top">
+		<div class="terminal__title">
+			Device Terminal
+		</div>
+		<button class="button button--outlined button--medium" (click)="initTerminal()">
+			{{ term ? 'Restart' : 'Start' }} terminal
+		</button>
+	</div>
+	<div class="terminal__main" #terminal>
+
+	</div>
+</div>

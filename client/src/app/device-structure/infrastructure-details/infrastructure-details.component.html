@@ -1,0 +1,97 @@
+<div class="infrastructure">
+	<div class="infrastructure__top">
+		<div class="infrastructure__title-section">
+			<div class="infrastructure__title">
+				{{ system?.reference?.name | titlecase }}
+			</div>
+			<div class="infrastructure__title-label">
+				Managed by Smart Infrastructure
+			</div>
+		</div>
+		<div class="infrastructure__buttons-section">
+			<button class="infrastructure__go-infra-button button button--ghost button--medium"
+							(click)="openInfra()">
+				<span class="icon icon--gold icon--size-16px icon icon--open-in-new-tab mr-1 mr-1"></span>
+				Go To Infrastructure
+			</button>
+			<button class="infrastructure__go-core button button--ghost button--small button--core-container"
+							(click)="openCore()">
+				<span class="button--core button--core--big">
+					<span class="icon service-icon system_graph"></span>
+					Go to Infrastructure core
+				</span>
+			</button>
+		</div>
+	</div>
+	<div class="infrastructure__info-container">
+		<div class="infrastructure__type">
+			{{ system?.reference?.type | titlecase }}
+		</div>
+		<div class="infrastructure__cover-container">
+			<span class="icon icon--image" *ngIf="!system?.reference?.logo"></span>
+			<img 	[src]="system?.reference?.logo?.signedUrl"
+						alt="Infrastructure cover"
+						*ngIf="system?.reference?.logo"
+						class="infrastructure__cover">
+		</div>
+		<div class="infrastructure__info-section">
+			<div class="infrastructure__info">
+				<label class="infrastructure__info-label">Location name:</label>
+				<div 	class="infrastructure__info-text"
+							tooltip="{{ system?.reference?.name }}"
+							container="body">
+					{{ system?.reference?.name }}
+				</div>
+			</div>
+			<div class="infrastructure__info">
+				<label class="infrastructure__info-label">Country:</label>
+				<div 	class="infrastructure__info-text"
+							tooltip="{{ system?.reference?.location?.address?.country }}"
+							container="body">
+					{{ system?.reference?.location?.address?.country || '-' }}
+				</div>
+			</div>
+			<div class="infrastructure__info">
+				<label class="infrastructure__info-label">Region state:</label>
+				<div 	class="infrastructure__info-text"
+							tooltip="{{ system?.reference?.location?.address?.regionState }}"
+							container="body">
+					{{ system?.reference?.location?.address?.regionState || '-' }}
+				</div>
+			</div>
+			<div class="infrastructure__info">
+				<label class="infrastructure__info-label">Address line:</label>
+				<div 	class="infrastructure__info-text"
+							tooltip="{{ system?.reference?.location?.address?.addressLine1 }}"
+							container="body">
+					{{ system?.reference?.location?.address?.addressLine1 || '-' }}
+				</div>
+			</div>
+			<div class="infrastructure__info">
+				<label class="infrastructure__info-label">Postal code:</label>
+				<div 	class="infrastructure__info-text"
+							tooltip="{{ system?.reference?.location?.address?.code }}"
+							container="body">
+					{{ system?.reference?.location?.address?.code || '-' }}
+				</div>
+			</div>
+			<div class="infrastructure__info">
+				<label class="infrastructure__info-label">Creator:</label>
+				<div 	class="infrastructure__info-text"
+							tooltip="{{ system?.createdBy?.profile?.firstName + ' ' + system?.createdBy?.profile?.lastName }}"
+							container="body">
+					{{ system?.createdBy?.profile?.firstName + ' ' + system?.createdBy?.profile?.lastName || '-' }}
+				</div>
+			</div>
+			<div class="infrastructure__info">
+				<label class="infrastructure__info-label">Creating date:</label>
+				<div class="infrastructure__info-text">
+					{{ system?.createdAt || '-' | date }}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="infrastructure__map-container">
+    <ai-infrastructure-google-map [infrastructure]="system?.reference"></ai-infrastructure-google-map>
+	</div>
+</div>

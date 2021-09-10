@@ -1,0 +1,96 @@
+<div class="admin">
+	<div class="admin__top">
+		<div class="admin__title">Admin</div>
+		<button class="admin__add button button--ghost button--medium"
+						(click)="openModal(activeTab)">
+			<span class="icon icon--plus icon--size-16px icon--gold mr--8"></span>
+			Add {{ activeTab === adminTabType.SYSTEM_TYPE ? 'system type' : activeTab === adminTabType.COMMANDS ? 'command' : 'device type' }}
+		</button>
+	</div>
+	<div class="admin__tabs">
+		<div 	class="admin__tab" [class.admin__tab--active]="activeTab === adminTabType.COMMANDS"
+					(click)="chooseTab(adminTabType.COMMANDS)">
+			Commands
+		</div>
+		<div 	class="admin__tab" [class.admin__tab--active]="activeTab === adminTabType.SYSTEM_TYPE"
+					(click)="chooseTab(adminTabType.SYSTEM_TYPE)">
+			System type
+		</div>
+		<div 	class="admin__tab" [class.admin__tab--active]="activeTab === adminTabType.DEVICE_TYPE"
+					(click)="chooseTab(adminTabType.DEVICE_TYPE)">
+			Device type
+		</div>
+	</div>
+	<div class="admin__main-container">
+		<div 	class="admin__list--empty"
+				*ngIf="!((activeTab === adminTabType.SYSTEM_TYPE && systemTypesList?.length) || (activeTab === adminTabType.DEVICE_TYPE && deviceTypesList?.length))">
+			No {{ getEmptyMessage() }} yet
+		</div>
+		<div 	class="admin__list data-list data-list--system-type"
+					*ngIf="(activeTab === adminTabType.SYSTEM_TYPE && systemTypesList?.length) || (activeTab === adminTabType.DEVICE_TYPE && deviceTypesList?.length)">
+			<div class="data-list__head">
+				<div class="data-list__serial data-list__head-item">
+					Serial number
+				</div>
+				<div class="data-list__name data-list__head-item">
+					Name
+				</div>
+				<div class="data-list__description data-list__head-item d-flex align-items-center">
+					Description
+					<span tooltip="Tooltip which describe where we use system type description"
+								container="body" class="icon icon--info ml--8"></span>
+				</div>
+				<div class="data-list__creator data-list__head-item">
+					Creator
+				</div>
+				<div class="data-list__date data-list__head-item">
+					Date of creation
+				</div>
+				<div class="data-list__empty-item data-list__head-item">
+
+				</div>
+			</div>
+			<div class="data-list__table">
+				<div 	class="data-list__item"
+							*ngFor="let item of (activeTab === adminTabType.SYSTEM_TYPE ? systemTypesList : deviceTypesList)">
+					<div class="data-list__serial data-list__item-section ellipsis">
+						{{ item?._id.slice(-6) || '-' }}
+					</div>
+					<div class="data-list__name data-list__item-section  ellipsis">
+						{{ item?.name }}
+					</div>
+					<div 	class="data-list__description data-list__item-section ellipsis"
+								tooltip="{{ item?.description }}" container="body" placement="auto">
+						{{ item?.description || '-' }}
+					</div>
+					<div class="data-list__creator data-list__item-section ellipsis">
+						{{ item?.createdBy?.profile?.firstName + ' ' + item?.createdBy?.profile?.lastName || '-' }}
+					</div>
+					<div class="data-list__date data-list__item-section ellipsis">
+						{{ item?.createdAt | date }}
+					</div>
+					<div class="data-list__actions">
+						<span class="data-list__task-action icon icon--edit icon--dynamic mr-3" 
+									tooltip="Edit task" containerClass="custom-tooltip"
+									placement="left" container="body" (click)="editItem(item)">
+						</span>
+						<span class="data-list__task-action  icon icon--show icon--dynamic"
+									tooltip="Cancel task" containerClass="custom-tooltip"
+									placement="left" container="body">
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<ai-system-type-form (close)="getTableData()"></ai-system-type-form>
+
+<ai-device-type-form (close)="getTableData()"></ai-device-type-form>
+
+<ai-commands-form></ai-commands-form>
+
+<div class="loading-container" *ngIf="loading">
+	<ai-loading></ai-loading>
+</div>

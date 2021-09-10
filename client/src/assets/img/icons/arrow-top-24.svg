@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+    <title>icon / 24-cont / arrows / arrow-top-24</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="26.6666667 16 24.7866667 14.12 17.3333333 21.56 17.3333333 5.33333333 14.6666667 5.33333333 14.6666667 21.56 7.22666667 14.1066667 5.33333333 16 16 26.6666667"></polygon>
+    </defs>
+    <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="01_Yezhik-/-01_BasePanels-/-01_01_Default" transform="translate(-709.000000, -729.000000)">
+            <g id="Group-11" transform="translate(696.000000, 680.000000)">
+                <g id="icon-/-24-cont-/-arrows-/-arrow-up-24" transform="translate(8.000000, 44.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#7E7E7E" fill-rule="nonzero" transform="translate(16.000000, 16.000000) scale(1, -1) translate(-16.000000, -16.000000) " xlink:href="#path-1"></use>
+                    <g id="Colors-/-Dark-Theme-/-Grayscale-/-Filled-/-$base-white" mask="url(#mask-2)" fill="#FFFFFF" fill-rule="evenodd">
+                        <rect id="Dark-Theme-/-Grayscale-/-Filled-/-$base-white" x="0" y="0" width="32" height="32"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,574 @@
+<div class="aos">
+  <div class="aos__top">
+    <div class="aos__camera-dropdown">
+      <label class="aos__label">Camera</label>
+      <ng-select  class="dropdown dropdown--outlined dropdown--medium"
+                  [items]="['1', '2', '3']" [clearable]="false" [searchable]="false"></ng-select>
+    </div>
+    <button class="button button--contained button--medium" (click)="connectViewer()">Start Video Stream</button>
+  </div>
+  <div class="aos__main">
+    <div class="view" #viewer>
+      <video flStreamerVideo class="view__video" #stream preload autoplay="autoplay" tabindex="0"></video>
+      <div class="view__over-top "></div>
+      <div class="view__over-right "></div>
+      <div class="view__over-bottom"></div>
+      <div class="view__over-left"></div>
+      <div class="view__speed speed">
+        <p class="speed__title">
+          <span class="speed__icon">
+            <img src="assets/img/icons/speed.svg" alt="">
+          </span>Speed
+        </p>
+        <div class="speed__index">
+          <div class="speed__scale">
+            <div class="speed__dot">
+            </div>
+            <div class="speed__dot">
+
+              <svg width="7px" height="11px" viewBox="0 0 7 11" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>speed-2</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-53.000000, -91.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-14" transform="translate(44.000000, 80.000000)">
+                      <path d="M16,11.832 L16,21.52 L9,21.52 L9,12.983 L16,11.832 Z" id="speed-2"></path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="speed__dot">
+
+              <svg width="7px" height="12px" viewBox="0 0 7 12" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>speed-3</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-62.000000, -90.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-14" transform="translate(44.000000, 80.000000)">
+                      <path d="M25,10.353 L25,21.52 L18,21.52 L18,11.504 L25,10.353 Z" id="speed-3"></path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="speed__dot">
+
+              <svg width="7px" height="14px" viewBox="0 0 7 14" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>speed-4</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-71.000000, -88.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-14" transform="translate(44.000000, 80.000000)">
+                      <path d="M34,8.874 L34,21.52 L27,21.52 L27,10.025 L34,8.874 Z" id="speed-4"></path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="speed__dot">
+
+              <svg width="7px" height="15px" viewBox="0 0 7 15" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>speed-5</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-80.000000, -87.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-14" transform="translate(44.000000, 80.000000)">
+                      <path d="M43,7.395 L43,21.52 L36,21.52 L36,8.545 L43,7.395 Z" id="speed-5"></path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="speed__dot">
+
+              <svg width="7px" height="17px" viewBox="0 0 7 17" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>speed-6</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-89.000000, -85.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-14" transform="translate(44.000000, 80.000000)">
+                      <path d="M52,5.916 L52,21.52 L45,21.52 L45,7.066 L52,5.916 Z" id="speed-6"></path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="speed__dot">
+
+              <svg width="7px" height="18px" viewBox="0 0 7 18" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>speed-7</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-98.000000, -84.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-14" transform="translate(44.000000, 80.000000)">
+                      <path d="M61,4.437 L61,21.52 L54,21.52 L54,5.588 L61,4.437 Z" id="speed-7"></path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="speed__dot">
+
+              <svg width="7px" height="20px" viewBox="0 0 7 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>speed-8</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-107.000000, -82.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-14" transform="translate(44.000000, 80.000000)">
+                      <path d="M70,2.957 L70,21.52 L63,21.52 L63,4.108 L70,2.957 Z" id="speed-8"></path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="speed__dot">
+
+              <svg width="7px" height="21px" viewBox="0 0 7 21" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>speed-9</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-116.000000, -81.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-14" transform="translate(44.000000, 80.000000)">
+                      <path d="M79,1.478 L79,21.52 L72,21.52 L72,2.629 L79,1.478 Z" id="speed-9"></path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="speed__dot">
+
+              <svg width="7px" height="22px" viewBox="0 0 7 22" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>speed-10</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-125.000000, -80.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-14" transform="translate(44.000000, 80.000000)">
+                      <path d="M88,-0.001 L88,21.52 L81,21.52 L81,1.15 L88,-0.001 Z" id="speed-10"></path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <div class="speed__quantity">
+            <span class="speed__numeral">24</span>
+            km/h
+          </div>
+        </div>
+      </div>
+      <div class="view__voltage voltage">
+        <p class="voltage__title">
+          <span class="speed__icon">
+
+            <svg width="8px" height="12px" viewBox="0 0 8 12" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink">
+              <title>voltage</title>
+              <desc>Created with Sketch.</desc>
+              <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="01_Yezhik-/-01_BasePanels-/-01_01_Default" transform="translate(-48.000000, -129.000000)">
+                  <g id="Group-4" transform="translate(32.000000, 115.000000)">
+                    <g id="voltage" transform="translate(8.000000, 8.000000)">
+                      <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+                      <path
+                        d="M15.7385615,10.5422769 L14.0769909,10.5422769 L12.2492631,10.5422769 C12.1121076,10.5422769 12.0000275,10.4240116 12.0000275,10.2797465 L12.0000275,7.99097256 L12.0000275,6.46045664 C12.0000275,5.89912969 11.7911914,5.84313033 11.5357503,6.33592472 L9.92306422,9.44895598 C8.74392318,11.7246634 8.11787915,12.9329163 8.04493214,13.0737147 C7.93551164,13.2849123 8.03290095,13.4578437 8.26149356,13.4578437 L9.92293758,13.4578437 C10.9614192,13.4578437 11.7506653,13.4578437 11.7506653,13.4578437 C11.8876942,13.4578437 12.0000275,13.5758424 12.0000275,13.7201074 L12.0000275,16.009148 L12.0000275,17.5396639 C12.0000275,18.1008576 12.208737,18.1568569 12.4640515,17.6640625 L14.0769909,14.5511646 L15.9551229,10.9261392 C16.0644168,10.7149416 15.9671541,10.5422769 15.7385615,10.5422769 Z"
+                        id="Path" fill="#FFFFFF" fill-rule="nonzero"></path>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </span>voltage
+        </p>
+        <div class="voltage__index">
+          <span class="voltage__current">6v</span>
+          <div class="voltage__scale">
+            <div class="voltage__dot">
+
+              <svg width="13px" height="6px" viewBox="0 0 13 6" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>voltage-1</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-44.000000, -178.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-4" transform="translate(32.000000, 115.000000)">
+                      <g id="Group-6" transform="translate(12.000000, 63.000000)">
+                        <rect id="voltage-1" x="0" y="0" width="13" height="6"></rect>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="voltage__dot">
+
+              <svg width="13px" height="6px" viewBox="0 0 13 6" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>voltage-1</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-44.000000, -178.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-4" transform="translate(32.000000, 115.000000)">
+                      <g id="Group-6" transform="translate(12.000000, 63.000000)">
+                        <rect id="voltage-1" x="0" y="0" width="13" height="6"></rect>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="voltage__dot">
+
+              <svg width="13px" height="6px" viewBox="0 0 13 6" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>voltage-1</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-44.000000, -178.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-4" transform="translate(32.000000, 115.000000)">
+                      <g id="Group-6" transform="translate(12.000000, 63.000000)">
+                        <rect id="voltage-1" x="0" y="0" width="13" height="6"></rect>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="voltage__dot">
+
+              <svg width="13px" height="6px" viewBox="0 0 13 6" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>voltage-1</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-44.000000, -178.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-4" transform="translate(32.000000, 115.000000)">
+                      <g id="Group-6" transform="translate(12.000000, 63.000000)">
+                        <rect id="voltage-1" x="0" y="0" width="13" height="6"></rect>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="voltage__dot">
+
+              <svg width="13px" height="6px" viewBox="0 0 13 6" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>voltage-1</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-44.000000, -178.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-4" transform="translate(32.000000, 115.000000)">
+                      <g id="Group-6" transform="translate(12.000000, 63.000000)">
+                        <rect id="voltage-1" x="0" y="0" width="13" height="6"></rect>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="voltage__dot">
+
+              <svg width="13px" height="6px" viewBox="0 0 13 6" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>voltage-1</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-44.000000, -178.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-4" transform="translate(32.000000, 115.000000)">
+                      <g id="Group-6" transform="translate(12.000000, 63.000000)">
+                        <rect id="voltage-1" x="0" y="0" width="13" height="6"></rect>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="voltage__dot">
+
+              <svg width="13px" height="6px" viewBox="0 0 13 6" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>voltage-1</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-44.000000, -178.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-4" transform="translate(32.000000, 115.000000)">
+                      <g id="Group-6" transform="translate(12.000000, 63.000000)">
+                        <rect id="voltage-1" x="0" y="0" width="13" height="6"></rect>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="voltage__dot">
+
+              <svg width="13px" height="6px" viewBox="0 0 13 6" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>voltage-1</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-44.000000, -178.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-4" transform="translate(32.000000, 115.000000)">
+                      <g id="Group-6" transform="translate(12.000000, 63.000000)">
+                        <rect id="voltage-1" x="0" y="0" width="13" height="6"></rect>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="voltage__dot">
+
+              <svg width="13px" height="6px" viewBox="0 0 13 6" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>voltage-1</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-44.000000, -178.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-4" transform="translate(32.000000, 115.000000)">
+                      <g id="Group-6" transform="translate(12.000000, 63.000000)">
+                        <rect id="voltage-1" x="0" y="0" width="13" height="6"></rect>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="voltage__dot">
+
+              <svg width="13px" height="6px" viewBox="0 0 13 6" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>voltage-1</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-44.000000, -178.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-4" transform="translate(32.000000, 115.000000)">
+                      <g id="Group-6" transform="translate(12.000000, 63.000000)">
+                        <rect id="voltage-1" x="0" y="0" width="13" height="6"></rect>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="voltage__dot">
+
+              <svg width="13px" height="6px" viewBox="0 0 13 6" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>voltage-1</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-44.000000, -178.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-4" transform="translate(32.000000, 115.000000)">
+                      <g id="Group-6" transform="translate(12.000000, 63.000000)">
+                        <rect id="voltage-1" x="0" y="0" width="13" height="6"></rect>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="voltage__dot">
+
+              <svg width="13px" height="6px" viewBox="0 0 13 6" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+                <title>voltage-1</title>
+                <desc>Created with Sketch.</desc>
+                <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="01_Yezhik-/-03_Battery-/-03_01_LowCharge" transform="translate(-44.000000, -178.000000)"
+                    fill="#0B0B0B">
+                    <g id="Group-4" transform="translate(32.000000, 115.000000)">
+                      <g id="Group-6" transform="translate(12.000000, 63.000000)">
+                        <rect id="voltage-1" x="0" y="0" width="13" height="6"></rect>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <div class="voltage_min-max">
+            <div class="voltage__min">0v</div>
+            <div class="voltage__max">12v</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="axes">
+        <p class="small">Linear Accel Axis: <br> {{ linearAccelAxis }}</p>
+        <p class="small">Angular Accel Axis: <br> {{ angularAccelAxis }}</p>
+      </div>
+
+      <div class="view__battery battery">
+        <div class="battery__number">100%</div>
+        <div class="battery__icon">
+          <div class="battery__dot">
+
+            <svg width="6px" height="8px" viewBox="0 0 6 8" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink">
+              <title>Rectangle</title>
+              <desc>Created with Sketch.</desc>
+              <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="01_Yezhik-/-01_BasePanels-/-01_01_Default" transform="translate(-1365.000000, -53.000000)"
+                  fill="#FFFFFF">
+                  <g id="Group-10" transform="translate(1287.000000, 32.000000)">
+                    <rect id="Rectangle" x="78" y="21" width="6" height="8"></rect>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="battery__dot">
+
+            <svg width="6px" height="8px" viewBox="0 0 6 8" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink">
+              <title>Rectangle</title>
+              <desc>Created with Sketch.</desc>
+              <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="01_Yezhik-/-01_BasePanels-/-01_01_Default" transform="translate(-1365.000000, -53.000000)"
+                  fill="#FFFFFF">
+                  <g id="Group-10" transform="translate(1287.000000, 32.000000)">
+                    <rect id="Rectangle" x="78" y="21" width="6" height="8"></rect>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="battery__dot">
+
+            <svg width="6px" height="8px" viewBox="0 0 6 8" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink">
+              <title>Rectangle</title>
+              <desc>Created with Sketch.</desc>
+              <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="01_Yezhik-/-01_BasePanels-/-01_01_Default" transform="translate(-1365.000000, -53.000000)"
+                  fill="#FFFFFF">
+                  <g id="Group-10" transform="translate(1287.000000, 32.000000)">
+                    <rect id="Rectangle" x="78" y="21" width="6" height="8"></rect>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <button class="fullscreen" (click)="fullscreen()">Fullscreen</button>
+      <button class="mapping" (click)="mapping()">Mapping</button>
+
+      <div class="view__task task">
+        <div class="task__title">
+
+          <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <title>task</title>
+            <desc>Created with Sketch.</desc>
+            <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="01_Yezhik-/-01_BasePanels-/-01_01_Default" transform="translate(-48.000000, -755.000000)">
+                <g id="Group-9" transform="translate(32.000000, 743.000000)">
+                  <g id="task" transform="translate(12.000000, 8.000000)">
+                    <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+                    <g id="Group-8" transform="translate(4.000000, 4.000000)" stroke="#FFFFFF" stroke-width="2">
+                      <rect id="Rectangle" x="1" y="1" width="14" height="14" rx="2"></rect>
+                      <polyline id="Path-2" points="4 8.74593301 6.80224609 10.7698975 12.3327637 3.99853516"></polyline>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>Task panel
+        </div>
+        <div class="task__description">Deliver new stuff from the sector H2 to sector H7</div>
+        <div class="task__title-second">History:</div>
+        <ul class="history-list">
+          <li class="history-list__item">Moves to H2 Road</li>
+          <li class="history-list__item">Follow the main Hall</li>
+          <li class="history-list__item">Moves to H8 Sector</li>
+          <li class="history-list__item">Put the box down</li>
+          <li class="history-list__item history-list__item--active">Moves to Main Hall</li>
+        </ul>
+        <div class="task__start-time-block">
+          <div class="task__time-title">Start time:</div>
+          <div class="task__time"><span>07:05</span> PM</div>
+        </div>
+        <div class="task__active-time-block">
+          <div class="task__time-title">Active time:</div>
+          <div class="task__time"> <span>23</span> Minutes</div>
+        </div>
+        <div class="task__status-block">
+          <div class="task__status-title">Status:</div>
+          <div class="task__status">IN_PROGRESS</div>
+        </div>
+      </div>
+
+      <div class="view__task-hot-key hot-key">
+        Task details<span class="hot-key__key">(CTRL+T)</span>
+      </div>
+
+      <div class="view__map">
+        <img src="assets/img/map.png" alt="">
+      </div>
+
+      <div class="view__map-hot-key hot-key">
+        Open Map<span class="hot-key__key">(CTRL+M)</span>
+      </div>
+
+      <div class="view__acceleration acceleration">
+        <div class="acceleration__overload-block acceleration__overload-block--large">
+          Acceleration
+          <span class="acceleration__overload">85g</span>
+        </div>
+        <div class="acceleration__top"
+          [ngClass]="{'acceleration__top--small': acceleration.top.small === true, 'acceleration__top--large': acceleration.top.large  === true }">
+          <img class="acceleration__top-arrow" src="assets/img/icons/arrow-up-24.svg" alt="">
+        </div>
+        <div class="acceleration__right"
+          [ngClass]="{'acceleration__right--small': acceleration.right.small, 'acceleration__right--large': acceleration.right.large }">
+          <img class="acceleration__right-arrow" src="assets/img/icons/arrow-right-24.svg" alt="">
+        </div>
+        <div class="acceleration__bottom"
+          [ngClass]="{'acceleration__bottom--small': acceleration.bottom.small, 'acceleration__bottom--large': acceleration.bottom.large }">
+          <img class="acceleration__bottom-arrow" src="assets/img/icons/arrow-down-24.svg" alt="">
+        </div>
+        <div class="acceleration__left"
+          [ngClass]="{'acceleration__left--small': acceleration.left.small, 'acceleration__left--large': acceleration.left.large }">
+          <img class="acceleration__left-arrow" src="assets/img/icons/arrow-left-24.svg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ai-gamepad-mapping #gamepadMappingComponent (saved)="savedMapping($event)"></ai-gamepad-mapping>

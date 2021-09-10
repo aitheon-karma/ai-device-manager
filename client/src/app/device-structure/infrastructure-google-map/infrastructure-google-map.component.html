@@ -1,0 +1,34 @@
+<div class="map" id="map" [hidden]="loading || noAddress">
+  <google-map height="100%"
+              width="100%"
+              [zoom]="zoom"
+              [center]="center"
+              [options]="options"
+              (mapClick)="click($event)">
+    <map-marker #markerElem
+                [position]="infrastructureMapMarker?.position"
+                (mapClick)="openInfo(markerElem, infrastructureMapMarker)"
+                (mapMouseover)="openHoverInfo(markerElem, infrastructureMapMarker)"
+                (mapMouseout)="hoverOut()"
+                [options]="infrastructureMapMarker?.options">
+      <map-info-window #infoMarker>
+        <div class="infrastructure-marker-info">
+          <h3 class="infrastructure-marker-info__name ellipsis">
+            {{ markerContent?.name }}
+          </h3>
+          <div class="infrastructure-marker-info__address ellipsis">
+            <span>{{ markerContent?.address }}</span>
+          </div>
+          <div class="d-flex align-items-center justify-content-between w-100">
+              <span class="infrastructure-marker-info__type" *ngIf="markerContent?.type">
+                {{ markerContent?.type | titlecase}}
+              </span>
+            <!-- <button class="button button--ghost button--small" (click)="openInfrastructure(markerContent)">
+              View
+            </button> -->
+          </div>
+        </div>
+      </map-info-window>
+    </map-marker>
+  </google-map>
+</div>

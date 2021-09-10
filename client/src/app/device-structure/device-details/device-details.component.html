@@ -1,0 +1,30 @@
+<div class="device">
+	<div class="device__tabs">
+		<div 	class="device__tab" [class.device__tab--active]="activeTab === tabType.GENERAL"
+					(click)="chooseTab(tabType.GENERAL)">
+			General
+		</div>
+		<div 	class="device__tab" [class.device__tab--active]="activeTab === tabType.TERMINAL"
+					(click)="chooseTab(tabType.TERMINAL)">
+			Terminal
+		</div>
+		<div 	class="device__tab" [class.device__tab--active]="activeTab === tabType.LOGS"
+					(click)="chooseTab(tabType.LOGS)">
+			Logs
+		</div>
+		<div 	class="device__tab" [class.device__tab--active]="activeTab === tabType.AOS_VIEWER"
+					(click)="chooseTab(tabType.AOS_VIEWER)">
+			AOS Viewer
+		</div>
+	</div>
+	<div class="device__content">
+
+		<ai-device-general *ngIf="activeTab === tabType.GENERAL"></ai-device-general>
+		
+		<ai-device-terminal *ngIf="activeTab === tabType.TERMINAL"></ai-device-terminal>
+
+		<ai-device-logs *ngIf="activeTab === tabType.LOGS"></ai-device-logs>
+
+		<ai-device-aos-viewer *ngIf="activeTab === tabType.AOS_VIEWER"></ai-device-aos-viewer>
+	</div>
+</div>

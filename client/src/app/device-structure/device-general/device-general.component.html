@@ -1,0 +1,536 @@
+<div class="device" *ngIf="!device?.isController">
+	<div class="device__top">
+		<div class="device__title-section">
+			<div class="device__name">
+				{{ device?.name }}
+			</div>
+			<div class="device__title-label" *ngIf="device?.infrastructure">
+				Managed by Smart Infrastructure
+			</div>
+		</div>
+		<button class="button button--ghost button--medium"
+						(click)="openDevice()">
+			<span class="icon icon--gold icon--size-16px icon icon--open-in-new-tab mr-1 mr-1"></span>
+			Go To Device
+		</button>
+	</div>
+	<div class="device__info-container device-info">
+		<div class="device-info__left-side">
+			<div class="device-info__cover-container">
+				<img *ngIf="!device?.image?.signedUrl" [src]="'assets/img/icons/image.svg'" style="max-width: 10%">
+				<img *ngIf="device?.image?.signedUrl" [src]="device?.image?.signedUrl">
+			</div>
+			<div class="device-info__title">System Information</div>
+			<div class="device-info__section align-items-start">
+				<label class="device-info__label device-info__label--biggest-line-height">Status:</label>
+				<div class="device-info__info">
+					<div  class="status-label status-label--blue mb--4"
+								[ngClass]="statusDeviceColor">
+						{{ device?.status | titlecase }}
+					</div>
+					<span>%Refresh each 15 sec%</span>
+				</div>
+			</div>
+			<div class="device-info__section">
+				<label class="device-info__label">Name:</label>
+				<div class="device-info__info">{{ device?.name }}</div>
+			</div>
+			<div class="device-info__section">
+				<label class="device-info__label">Battery:</label>
+				<div class="device-info__info">
+					<svg 	xmlns="http://www.w3.org/2000/svg"
+								width="26"
+								height="14"
+								viewBox="0 0 26 14">
+						<title>charge-battery</title>
+						<g fill="none">
+							<g>
+								<path d="M23 0C23.6 0 24 0.4 24 1L24 4 25 4C25.6 4 26 4.4 26 5L26 9C26 9.6 25.6 10 25 10L24 10 24 13C24 13.6 23.6 14 23 14L1 14C0.4 14 0 13.6 0 13L0 1C0 0.4 0.4 0 1 0L23 0ZM22 2L2 2 2 12 22 12 22 2Z"
+											fill="#fff"
+											id="battery" />
+								<rect x="4"
+											y="4"
+											width="4"
+											height="6"
+											fill="transparent"
+											id="battery-low" />
+								<rect x="10"
+											y="4"
+											width="4"
+											height="6"
+											fill="transparent"
+											id="battery-medium" />
+								<rect x="16"
+											y="4"
+											width="4"
+											height="6"
+											fill="transparent"
+											id="battery-full" />
+							</g>
+						</g>
+					</svg>
+					<!-- [class.charge--red]="device?.batteryHealth <= 30" -->
+					<span class="device-info__info pl--8" [class.device-info__info--red]="device?.batteryHealth <= 30">
+						{{ device?.batteryHealth }}%
+					</span>
+				</div>
+			</div>
+			<div class="device-info__section">
+				<label class="device-info__label">Form:</label>
+				<div class="device-info__info">Robotics</div>
+			</div>
+			<div class="device-info__section">
+				<label class="device-info__label">Type:</label>
+				<div class="device-info__info">{{ device?.isController ? 'Controller' : device?.type?.name.replace('_', ' ') || '-' | titlecase }}</div>
+			</div>
+			<div class="device-info__section">
+				<label class="device-info__label">Model:</label>
+				<div class="device-info__info">{{ device?.model || '-' }}</div>
+			</div>
+			<div class="device-info__section">
+				<label class="device-info__label">Address Port:</label>
+				<div class="device-info__info">{{ device?.port || '-' }}</div>
+			</div>
+			<div class="device-info__section">
+				<label class="device-info__label">IP address:</label>
+				<div class="device-info__info">{{ device?.address || '-' }}</div>
+			</div>
+			<div class="device-info__section">
+				<label class="device-info__label">Serial Number:</label>
+				<div class="device-info__info" tooltip="{{ device?.serialNumber || ''}}">{{ device?.serialNumber || '-'}}</div>
+			</div>
+			<div class="device-info__section">
+				<label class="device-info__label">Driver:</label>
+				<div class="device-info__info">%Aitheon Interface%</div>
+			</div>
+			<div class="device-info__section">
+				<label class="device-info__label">Home charging:</label>
+				<div class="device-info__info">{{ device?.chargingStation?.name || '-' }}</div>
+			</div>
+			<div class="device-info__section">
+				<label class="device-info__label">Default task:</label>
+				<div class="device-info__info">{{ device?.defaultTask?.orchestratorTask?.name || '-' }}</div>
+			</div>
+			<div class="device-info__section align-items-start">
+				<label class="device-info__label">CPU:</label>
+				<div class="device-info__info">Avg load: 134% <br>Current load: 85%</div>
+			</div>
+			<div class="device-info__section">
+				<label class="device-info__label">Cores:</label>
+				<div class="device-info__info">80% 91% 78%</div>
+			</div>
+			<div class="device-info__section align-items-start">
+				<label class="device-info__label">Memory:</label>
+				<div class="device-info__info">Total: 3.87 GB<br> Active: 1.79 GB<br> Available: 2.08 GB</div>
+			</div>
+			<div class="device-info__divider"></div>
+			<div class="device-info__title mt-2">Modules</div>
+			<div class="device-info__section-header" (click)="isBatteryModuleOpen = !isBatteryModuleOpen">
+				Battery module
+				<span class="device-info__section-arrow-icon icon icon--dynamic icon--arrow-drop-down"
+							[class.device-info__section-arrow-icon--rotate]="isBatteryModuleOpen"></span>
+			</div>
+			<div class="device-info__group" *ngIf="isBatteryModuleOpen">
+				<div class="device-info__section">
+					<label class="device-info__label">Charging Cycles:</label>
+					<div class="device-info__info">10 / 300</div>
+				</div>
+				<div class="device-info__section">
+					<label class="device-info__label">Camera:</label>
+					<div class="device-info__info device-info__info--red">Offline</div>
+				</div>
+				<div class="device-info__section">
+					<label class="device-info__label">Motor:</label>
+					<div class="device-info__info device-info__info--green">Active</div>
+				</div>
+				<div class="device-info__section">
+					<label class="device-info__label">%Module.Name%:</label>
+					<div class="device-info__info">%Value%</div>
+				</div>
+			</div>
+			<div class="device-info__section-header" (click)="isCameraModuleOpen = !isCameraModuleOpen">
+				Camera module
+				<span class="device-info__section-arrow-icon icon icon--dynamic icon--arrow-drop-down"
+							[class.device-info__section-arrow-icon--rotate]="isCameraModuleOpen"></span>
+			</div>
+			<div class="device-info__group" *ngIf="isCameraModuleOpen">
+				<div class="device-info__section">
+					<label class="device-info__label">Charging Cycles:</label>
+					<div class="device-info__info">10 / 300</div>
+				</div>
+				<div class="device-info__section">
+					<label class="device-info__label">Camera:</label>
+					<div class="device-info__info device-info__info--red">Offline</div>
+				</div>
+				<div class="device-info__section">
+					<label class="device-info__label">Motor:</label>
+					<div class="device-info__info device-info__info--green">Active</div>
+				</div>
+				<div class="device-info__section">
+					<label class="device-info__label">%Module.Name%:</label>
+					<div class="device-info__info">%Value%</div>
+				</div>
+			</div>
+		</div>
+		<div class="device-info__right-side">
+			<div class="device-info__tasks-container tasks">
+				<div class="tasks__tabs">
+					<div 	class="tasks__tab" [class.tasks__tab--active]="activeTab === taskTabType.TASKS"
+								(click)="chooseTab(taskTabType.TASKS)">
+						Tasks
+					</div>
+					<div 	class="tasks__tab" [class.tasks__tab--active]="activeTab === taskTabType.HISTORY"
+								(click)="chooseTab(taskTabType.HISTORY)">
+						History
+					</div>
+				</div>
+				<div class="tasks__content" *ngIf="activeTab === taskTabType.TASKS">
+					<label class="my-3 w-100 text-center" *ngIf="!tasks?.length">No tasks</label>
+					<div class="task-card" *ngFor="let task of tasks">
+						<div class="task-card__header">
+							<div class="d-flex mb--8 align-items-center">
+								<a href="javascript: void(0)" style="pointer-events: none">
+									#{{ task?.taskNumber || task?._id }}
+								</a>
+								<span class="pl--16 pr--16" style="color: rgb(126, 126, 126)"> | </span>
+								<div class="chip chip--outlined ellipsis mr--16">
+									<span>{{ task?.type.replace('_', ' ') | titlecase }}</span>
+								</div>
+								<div class="status-label ml-auto" [ngClass]="getTaskColor(task)">
+									{{ task.status.toString() === 'ERROR' ? 'Failed' : task.status.toString() === 'PENDING' ? 'In Queue' : task.status.replace('_', ' ') | titlecase }}
+								</div>
+								<!-- <div class="task-card__header__actions" *ngIf="actions !== false && task?.status !== 'IN_PROGRESS'">
+									<button class="icon icon--edit icon--dynamic mr--16 ml--16"
+													tooltip="Edit task" container="body"
+													placement="top"
+													(click)="editTask(task)">
+									</button>
+									<button class="icon icon--close icon--dynamic"
+													tooltip="Cancel task" container="body"
+													placement="top"
+													(click)="cancelTask($event, task._id)">
+									</button>
+								</div> -->
+							</div>
+							<span>{{ task.orchestratorTask.name }}</span>
+						</div>
+						<div class="task-card__body">
+							<div class="divider mt--16 mb--16"></div>
+							<div class="d-flex align-items-center justify-content-start mb--8">
+								<span class="detail-label">Work Floor:</span>
+								<span class="ellipsis">
+									<span *ngIf="task?.floor?.name">{{ task?.floor?.name }} {{ task?.floor?.number }}</span>
+								</span>
+							</div>
+							<div class="d-flex align-items-center justify-content-start mb--8" *ngIf="task.area?.name">
+								<span class="detail-label">Work Area:</span>
+								<span class="ellipsis">
+											{{ task.area?.name }}
+										</span>
+							</div>
+							<div class="d-flex align-items-center justify-content-start ellipsis mb--8">
+								<span class="detail-label">Creator:</span>
+								<div class="chip chip--icon-left chip--outlined">
+									<div class="chip__icon-wrap--left avatar avatar--16">
+										<ngx-avatar name="{{ task?.orchestratorTask?.createdBy?.profile?.firstName }} {{ task?.orchestratorTask?.createdBy?.profile?.lastName }}"
+																size="16"
+																value="{{ task?.orchestratorTask?.createdBy?.profile?.firstName }} {{ task?.orchestratorTask?.createdBy?.profile?.lastName }}"
+																[src]="task?.orchestratorTask?.createdBy?.profile?.avatarUrl">
+										</ngx-avatar>
+									</div>
+									{{ task?.orchestratorTask?.createdBy?.profile?.firstName }} {{ task?.orchestratorTask?.createdBy?.profile?.lastName }}
+								</div>
+							</div>
+							<div class="d-flex align-items-center justify-content-start ellipsis mb--8" *ngIf="task.updatedAt">
+								<span class="detail-label">Start Time:</span>
+								<span class="ellipsis">{{ task.updatedAt | date:'shortTime' }}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tasks__content" *ngIf="activeTab === taskTabType.HISTORY">
+					<div class="search-container search-container--contained mb--16"
+                 [class.search-container--filled]="search.value.length">
+              <input type="search"
+                     placeholder="Search by Task ID or Name…"
+                     (input)="searchHistoryTasks(search.value)"
+                     #search
+                     class="search-container__input">
+              <div class="search-container__button icon icon--search icon--size-16px"></div>
+              <div class="search-container__button icon icon--close icon--dynamic icon--size-16px"
+                   (click)="searchHistoryTasks(''); search.value = ''">
+              </div>
+						</div>
+					<label class="my-3 w-100 text-center" *ngIf="!historyTasks?.length">No history tasks</label>
+					<div class="task-card" *ngFor="let task of historyTasks">
+						<div class="task-card__header">
+							<div class="d-flex mb--8 align-items-center">
+								<a href="javascript: void(0)" style="pointer-events: none">
+									#{{ task?.taskNumber || task?._id }}
+								</a>
+								<span class="pl--16 pr--16" style="color: rgb(126, 126, 126)"> | </span>
+								<div class="chip chip--outlined ellipsis mr--16">
+									<span>{{ task?.type.replace('_', ' ') | titlecase }}</span>
+								</div>
+								<div class="status-label ml-auto" [ngClass]="getTaskColor(task)">
+									{{ task.status.toString() === 'ERROR' ? 'Failed' : task.status.toString() === 'PENDING' ? 'In Queue' : task.status.replace('_', ' ') | titlecase }}
+								</div>
+								<!-- <div class="task-card__header__actions" *ngIf="actions !== false && task?.status !== 'IN_PROGRESS'">
+									<button class="icon icon--edit icon--dynamic mr--16 ml--16"
+													tooltip="Edit task" container="body"
+													placement="top"
+													(click)="editTask(task)">
+									</button>
+									<button class="icon icon--close icon--dynamic"
+													tooltip="Cancel task" container="body"
+													placement="top"
+													(click)="cancelTask($event, task._id)">
+									</button>
+								</div> -->
+							</div>
+							<span>{{ task.orchestratorTask.name }}</span>
+						</div>
+						<div class="task-card__body">
+							<div class="divider mt--16 mb--16"></div>
+							<!-- <div class="d-flex align-items-center justify-content-start mb--8">
+								<span class="detail-label">Work Floor:</span>
+								<span class="ellipsis">
+									<span *ngIf="floor?.name">{{ floor?.name }} {{ floor?.number }}</span>
+								</span>
+							</div> -->
+							<div class="d-flex align-items-center justify-content-start mb--8" *ngIf="task.area?.name">
+								<span class="detail-label">Work Area:</span>
+								<span class="ellipsis">
+											{{ task.area?.name }}
+										</span>
+							</div>
+							<div class="d-flex align-items-center justify-content-start ellipsis mb--8">
+								<span class="detail-label">Creator:</span>
+								<div class="chip chip--icon-left chip--outlined">
+									<div class="chip__icon-wrap--left avatar avatar--16">
+										<ngx-avatar name="{{ task?.orchestratorTask?.createdBy?.profile?.firstName }} {{ task?.orchestratorTask?.createdBy?.profile?.lastName }}"
+																size="16"
+																value="{{ task?.orchestratorTask?.createdBy?.profile?.firstName }} {{ task?.orchestratorTask?.createdBy?.profile?.lastName }}"
+																[src]="task?.orchestratorTask?.createdBy?.profile?.avatarUrl">
+										</ngx-avatar>
+									</div>
+									{{ task?.orchestratorTask?.createdBy?.profile?.firstName }} {{ task?.orchestratorTask?.createdBy?.profile?.lastName }}
+								</div>
+							</div>
+							<div class="d-flex align-items-center justify-content-start ellipsis mb--8" *ngIf="task.updatedAt">
+								<span class="detail-label">Start Time:</span>
+								<span class="ellipsis">{{ task.updatedAt | date:'shortTime' }}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="device device--controller" *ngIf="device?.isController">
+	<div class="device__top">
+		<div class="device__title-section">
+			<div class="device__name">
+				{{ device?.name }}
+			</div>
+			<div class="device__title-label" *ngIf="device?.infrastructure">
+				Managed by Smart Infrastructure
+			</div>
+		</div>
+		<button class="button button--ghost button--medium"
+						(click)="openDevice()">
+			<span class="icon icon--gold icon--size-16px icon icon--open-in-new-tab mr-1 mr-1"></span>
+			Go To Device Page
+		</button>
+	</div>
+	<div class="device__info-container device-info">
+		<div class="device-info__left-side">
+			<div class="device-info__cover-container">
+				<img *ngIf="!device?.image?.signedUrl" [src]="'assets/img/icons/image.svg'" style="max-width: 10%">
+				<img *ngIf="device?.image?.signedUrl" [src]="device?.image?.signedUrl">
+			</div>
+			<div class="device-info__title">System Information</div>
+			<div class="device-info__section align-items-start">
+				<label class="device-info__label">Status:</label>
+				<div class="device-info__info">
+					<div  class="status-label status-label--blue mb--4"
+								[ngClass]="statusDeviceColor">
+						{{ device?.status | titlecase }}
+					</div>
+				</div>
+			</div>
+			<div class="device-info__section">
+				<label class="device-info__label">Name:</label>
+				<div class="device-info__info">{{ device?.name }}</div>
+			</div>
+			<div class="device-info__section">
+				<label class="device-info__label">Form:</label>
+				<div class="device-info__info">Robotics</div>
+			</div>
+			<div class="device-info__section">
+				<label class="device-info__label">Type:</label>
+				<div class="device-info__info">{{ device?.isController ? 'Controller' : device?.type?.name.replace('_', ' ') || '-' | titlecase }}</div>
+			</div>
+			<div class="device-info__section">
+				<label class="device-info__label">Serial Number:</label>
+				<div class="device-info__info" tooltip="{{ device?.serialNumber || ''}}">{{ device?.serialNumber || '-'}}</div>
+			</div>
+		</div>
+		<div class="device-info__vr-divider"></div>
+		<div class="device-info__right-side">
+			<div class="device-info__controller-information">
+        <div class="device-info__controller-section device-info__controller-section--border-bottom">
+          <div class="device-info__controller-section-head mb-0">
+            <div class="d-flex">
+              <label class="mr--8 mb-0">Driver:</label>
+							<label class="mb-0"
+										 [ngStyle]="deviceDriver?.name ? {'color': 'white'} : ''">
+								{{ deviceDriver?.name || 'No driver' }}
+							</label>
+              <!-- <span class="icon icon--delete icon--dynamic ml-2"
+                    (click)="deleteDriver()" tooltip="Remove driver"
+                    container="body" placement="bottom"
+                    *ngIf="device?.deviceDriver"></span> -->
+            </div>
+            <button class="button button--ghost button--disabled button--small"
+										*ngIf="!device?.deviceDriver"
+										tooltip="Managed by Smart Infrastructure" container="body"
+										placement="bottom">
+              <span class="icon icon--plus icon--size-16px icon--gold mr--8"></span>
+              Add Driver
+            </button>
+          </div>
+        </div>
+        <div class="device-info__controller-section device-info__controller-section--border-bottom">
+          <div class="device-info__controller-section-head">
+            <div class="device-info__system-information__title device-info__system-information__title--small">
+              Applications
+            </div>
+						<button class="button button--ghost button--disabled button--small"
+										tooltip="Managed by Smart Infrastructure" container="body"
+										placement="auto">
+              <span class="icon icon--plus icon--size-16px icon--gold mr--8"></span>
+              Add Application
+            </button>
+          </div>
+          <div class="device-info__controller-section-list">
+            <div class="applications__item application mt-2"
+                 *ngFor="let app of deviceApplications">
+              <div class="application__top">
+                <div class="application__info">
+                  <div class="application__name">{{ app?.project?.name }}</div>
+                  <div class="application__version">v {{ app?.version }}</div>
+                </div>
+                <div class="application__status"
+                     [class.application__status--base-red]="app?.status !== 'RUNNING' && app?.status !== 'PENDING'"
+                     [class.application__status--base-green]="app?.status === 'RUNNING' || app?.status === 'PENDING'">
+                  {{ app?.status !== 'RUNNING' && app?.status !== 'PENDING' ? 'Stopped' : 'Running' }}
+                </div>
+              </div>
+              <div class="application__divider"></div>
+              <div class="d-flex flex-column w-100">
+                <div class="application__bottom">
+                  <div class="application__control">
+                    <button class="icon icon--pause icon--red icon--dynamic icon--disabled"
+                          disabled
+                          *ngIf="(app?.status === 'RUNNING' || app?.status === 'PENDING'); else deployAppButton"
+                          tooltip="Stop application"
+													container="body"></button>
+													<!-- (click)="deployApplication(app, false)" -->
+                    <ng-template #deployAppButton>
+                      <button class="icon icon--play icon--green icon--dynamic icon--disabled"
+                              disabled
+                              tooltip="Run application"
+                              container="body"></button>
+                      <!-- (click)="deployApplication(app, true)" -->
+                    </ng-template>
+                  </div>
+                  <div class="application__actions">
+                    <span class="icon icon--show icon--dynamic icon--disabled mr--16"
+                          [class.icon--disabled]="(app?.status !== 'RUNNING' && app?.status !== 'PENDING')"
+                          tooltip="View application"
+													container="body"></span>
+													<!-- (click)="goToApplication(app)" -->
+                    <!-- <span class="icon icon--edit icon--dynamic mr--16"
+                          (click)="editApplication(app?.project)"></span>
+                    <span class="icon icon--delete icon--dynamic"
+                          (click)="deleteApplication(app?.graphNodeId)"></span> -->
+                  </div>
+                </div>
+                <div class="application__new-version"
+                     *ngIf="!app?.isLatest">
+                  <div class="application__new-version-info">
+                    <div class="application__new-version-text">
+                      New version is ready! Let’s update
+                    </div>
+                    <!-- <button class="button button--ghost button--small"
+                            (click)="updateAppToLatest(app?.graphNodeId)">
+                      <span class="icon icon--update icon--active mr--4"></span>
+                      update
+                    </button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="device-info__controller-section-empty"
+                 *ngIf="!device?.applications?.length">
+              No applications
+            </div>
+          </div>
+        </div>
+        <div class="device-info__controller-section">
+          <div class="device-info__controller-section-head">
+            <div class="device-info__system-information__title device-info__system-information__title--small">
+              Linked devices
+            </div>
+						<button class="button button--ghost button--small button--disabled"
+										tooltip="Managed by Smart Infrastructure" container="body"
+										placement="auto">
+              <span class="icon icon--plus icon--size-16px icon--gold mr--8"></span>
+              Add Device
+            </button>
+          </div>
+          <div class="device-info__controller-section-list">
+            <div class="devices__list"
+                 *ngIf="device?.controllerDevices?.length">
+              <div class="devices__item device-item"
+                   [class.device-item--bridge]="linkedDevice?.bridgeMode"
+                   *ngFor="let linkedDevice of device?.controllerDevices">
+                <div class="device-item__visual-info">
+                  <div class="device-item__image">
+                    <span class="icon icon--image icon--size-16px"></span>
+                  </div>
+                </div>
+                <div class="device-item__center">
+                  <div class="device-item__info">
+                    <div class="device-item__name">{{ linkedDevice.name }}</div>
+                    <div class="device-item__version mb--8">v 1.01</div>
+                    <div class="device-item__type">
+                      {{ linkedDevice.type?.name.replace('_', ' ') | titlecase }}
+                    </div>
+                  </div>
+                </div>
+                <div class="device-item__right ml-auto">
+                  <div class="device-item__status ml-auto mr--16"
+                       [ngClass]="linkedDevice.online ? 'device-item__status--base-green' : 'device-item__status--base-red'">
+                    {{ linkedDevice.online ? 'Online' : 'Offline' }}
+                  </div>
+                  <!-- <button class="icon icon--delete icon--dynamic"
+                          (click)="onRemoveDevice($event, linkedDevice._id, device)"></button> -->
+                </div>
+                <span class="device-item__bridge"
+                      *ngIf="linkedDevice.bridgeMode">Using as a Bridge</span>
+              </div>
+            </div>
+            <div class="device-info__controller-section-empty my-5"
+                 *ngIf="!device?.controllerDevices?.length">
+              No devices
+            </div>
+          </div>
+        </div>
+      </div>
+		</div>
+	</div>
+</div>

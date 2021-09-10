@@ -1,0 +1,41 @@
+Workflow
+
+Registration
+
+-Device calls in to register Itself
+-Either Device/registerSerial or registerKey (app.post?)
+\/
+-Server looks up device to see if it exists.
+-If it does it sends back its Device id
+\/
+-Device gets Id and gets its current Profile Device/getProfile
+TODO: device updates localip and other local params etc of Profile and updates server -Device/UpdateDeviceProfile
+\/
+-Server returns success or error
+\/
+TODO: On Success the device opens a Web Socket Connection to server
+\/
+TODO: Server returns success or error
+\/
+TODO: on Success the device begins to stream State updates on intervals defined in Profile
+
+
+
+Update device profile
+
+User update settings in web app (client/UpdateDeviceProfile)
+\/
+Server gets update and saves to dB then checks for Device web socket. If web socket is open it sends profile update message to device. appends action to log.
+\/
+Device gets and saves Update. returns success or error
+\/
+Server appends response to log.
+
+
+add timeout on websocket connection to make stale
+Create json file to hold device manager settings. Load/edit/update ability.
+
+TODO: Use google protocol buffers for communication packets
+TODO: Use Gzip (zlib in nodejs) to compress the protocol buffer, then send to device/server
+TODO: Convert deviceType database model.
+

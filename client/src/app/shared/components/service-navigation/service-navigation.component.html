@@ -1,0 +1,12 @@
+<div class="navigation-menu__wrap" *ngIf="currentUser">
+	<div class="navigation-menu">
+		<ng-container *ngFor="let item of menuData">
+			<div class="navigation-menu__item"
+						(click)="changeTab($event, item.routerLink)"
+						[class.d-none]="item.title === 'Admin' && currentUser?.platformRole !== 'PLATFORM_ADMIN'"
+						[class.navigation-menu__item--active]="router?.url?.includes('/' + item.routerLink[0])">
+				{{ item.title }}
+			</div>
+		</ng-container>
+	</div>
+</div>

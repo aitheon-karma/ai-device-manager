@@ -1,0 +1,357 @@
+@font-face {
+  font-family: "roboto-regular";
+  src: url("../assets/fonts/RobotoMono-Regular.ttf") format("truetype");
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "roboto-bold";
+  src: url("../assets/fonts/RobotoMono-Bold.ttf") format("truetype");
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RobotoMono-Regular";
+  src: url("../assets/fonts/RobotoMono-Regular.ttf") format("truetype");
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RobotoMono-Bold";
+  src: url("../assets/fonts/RobotoMono-Bold.ttf") format("truetype");
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+html {
+
+	.container {
+		max-width: 1224px;
+	}
+}
+
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(#1f1f1f, 0.9);
+  z-index: 550;
+}
+
+.icon--device {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url('~/assets/img/icons/device.svg') center center no-repeat;
+  background-size: contain;
+}
+
+.icon--floor {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url('~/assets/img/icons/floor.svg') center center no-repeat;
+  background-size: contain;
+}
+
+.icon--station {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url('~/assets/img/icons/station.svg') center center no-repeat;
+  background-size: contain;
+}
+
+.button--core-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1px;
+  background: linear-gradient(to right, #2a6ef9, #9044f2);
+}
+
+.button--core {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  width: 132px;
+  color: #fff;
+  background: #181818;
+  border-radius: 1px;
+  transition: .2s ease-in-out;
+
+  &--big {
+    width: 242px;
+  }
+
+  &--medium {
+    width: 180px;
+  }
+
+  &:hover {
+    background: rgba(#181818, 0.7);
+    transition: .2s ease-in-out;
+  }
+
+  .service-icon {
+    margin-right: 12px;
+  }
+}
+
+a[href^="http://maps.google.com/maps"]{display:none !important}
+a[href^="https://maps.google.com/maps"]{display:none !important}
+
+.floor {
+
+  ai-infrastructure-map {
+
+    .infrastructure-map__overflow-container {
+      width: 784px !important;
+    }
+
+    .infrastructure-map__zoom-buttons {
+      right: 22px !important;
+    }
+  }
+}
+
+.textarea-wrap--contained {
+  border-radius: 2px;
+
+  textarea {
+      resize: none;
+  }
+
+  &:before {
+      display: none;
+  }
+}
+
+.modal {
+
+  .modal-footer {
+    padding: 10px 24px;
+  }
+
+  .modal-body {
+    padding: 16px 24px 24px 24px;
+
+    &__section {
+      margin-bottom: 16px;
+    }
+  }
+
+  .create-modal {
+    width: 560px;
+    max-width: 560px;
+    height: 668px;
+    max-height: 668px;
+  }
+}
+
+.textarea-wrap {
+  position: relative;
+
+  &__counter {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      color: #7e7e7e;
+      font-size: 12px;
+      line-height: 12px;
+  }
+}
+
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(#1f1f1f, 0.9);
+  z-index: 550;
+}
+
+.node-creation {
+  left: 0 !important;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tooltip {
+  width: fit-content !important;
+  opacity: 100 !important;
+
+  .tooltip-inner {
+    width: fit-content !important;
+    background: #383838;
+    box-shadow: 0 2px 6px 2px #1a1a1a;
+    margin: 0 auto;
+    text-align: center;
+    padding: 8px 12px;
+  }
+
+  .tooltip-arrow {
+    display: none;
+  }
+}
+
+// Google Map Styles
+.gmnoprint a,
+.gmnoprint span {
+  display: none;
+}
+
+.gmnoprint div {
+  background: none !important;
+}
+
+.gm-style-cc {
+  display: none;
+}
+
+.gm-style .gm-style-iw-t::after {
+  background: rgb(56, 56, 56) !important;
+  box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+.gm-style-iw.gm-style-iw-c {
+  background: rgb(56, 56, 56);
+  border-radius: 2px;
+  height: auto !important;
+  width: auto !important;
+  min-width: 246px !important;
+  min-height: 115px !important;
+  padding: 16px;
+
+  .gm-style-iw-d {
+    overflow: visible !important;
+    width: calc(100% - 16px);
+  }
+
+  button.gm-ui-hover-effect { display: none !important; }
+
+  .infrastructure-marker-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__name {
+      color: rgb(255, 255, 255);
+      font-size: 14px;
+      font-weight: normal;
+      letter-spacing: 0.2px;
+      line-height: 20px;
+      width: 100%;
+    }
+
+    &__address {
+      color: rgb(126, 126, 126);
+      font-size: 12px;
+      font-weight: normal;
+      letter-spacing: 0.3px;
+      line-height: 20px;
+      margin-bottom: 8px;
+      width: 100%;
+    }
+
+    &__type {
+      padding: 3px 12px;
+      border-radius: 18px;
+      border: 1px solid rgb(126, 126, 126);
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgb(255, 255, 255);
+      font-size: 12px;
+      font-weight: normal;
+      letter-spacing: 0.3px;
+      line-height: 20px;
+    }
+  }
+}
+
+.map-intersection-warning {
+  position: absolute;
+  display: block;
+  background: crimson;
+  width: 40px;
+  height: 20px;
+}
+
+
+.button--disabled {
+  pointer-events: all !important;
+}
+
+.custom-modal {
+  max-width: 840px !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;
+  transition: 0s !important;
+
+  &--small {
+    max-width: 560px;
+
+    .modal-body {
+      height: 642px !important;
+    }
+  }
+
+  &--medium {
+    max-width: 768px;
+
+    .modal-body {
+      height: 616px !important;
+    }
+  }
+
+  .modal-body {
+    height: 80vh;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      background-color: transparent !important;
+      width: 2px !important;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #454545 !important;
+      border-radius: 4px !important;
+    }
+  }
+}
+
+
+.modal-footer {
+  padding: 12px 16px;
+}
+
+.custom-modal-size {
+  max-width: 768px;
+  margin: 2rem auto;
+}

@@ -1,0 +1,263 @@
+<div class="station">
+	<div class="station__top">
+		<div class="station__title-section">
+			<div class="station__title">
+				{{ station?.name }}
+			</div>
+			<div class="station__title-label">
+				Managed by Smart Infrastructure
+			</div>
+		</div>
+		<div class="station__buttons-section">
+			<button class="station__go-infra-button button button--ghost button--medium"
+							(click)="openStation()">
+				<span class="icon icon--gold icon--size-16px icon icon--open-in-new-tab mr-1 mr-1"></span>
+				Go To Station Page
+			</button>
+			<button class="station__go-core button button--ghost button--small button--core-container"
+							(click)="openCore()">
+				<span class="button--core button--core--medium">
+					<span class="icon service-icon system_graph"></span>
+						Open station core
+				</span>
+			</button>
+		</div>
+	</div>
+	<div class="station__main-info-container station-info">
+		<div class="station-info__left">
+			<div class="station-info__image">
+				<img 	src="assets/img/station-cover.svg" style="width: 50%" alt="Station Image"
+							*ngIf="!station?.layoutImage?.signedUrl">
+				<img class="station-info__cover-img" [src]="station?.layoutImage?.signedUrl" alt="Station Image"
+						 *ngIf="station?.layoutImage?.signedUrl">
+			</div>
+			<div class="station-info__data-container">
+				<div class="station-info__data-section">
+					<label class="station-info__data-label">
+						Station ID:
+					</label>
+					<div class="station-info__data-text">
+						#{{ station?._id.slice(-6) || '-' }}
+					</div>
+				</div>
+				<div class="station-info__data-section">
+					<label class="station-info__data-label">
+						Status:
+					</label>
+					<div class="station-info__data-text station-info__data-text--red">
+						Offline
+					</div>
+				</div>
+				<div class="station-info__data-section">
+					<label class="station-info__data-label">
+						Pay rate:
+					</label>
+					<div class="station-info__data-text">
+						$ {{ station?.payRate || '-' }}
+					</div>
+				</div>
+				<div class="station-info__data-section">
+					<label class="station-info__data-label">
+						Location:
+					</label>
+					<div class="station-info__data-text station-info__data-text--gray">
+						No location
+					</div>
+				</div>
+				<div class="station-info__data-section">
+					<label class="station-info__data-label">
+						Image scale:
+					</label>
+					<div class="station-info__data-text">
+						 {{ '1 : ' + station?.pixelScale || '-' }}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="station-info__right">
+			<label>Station cover:</label>
+			<div class="station-info__cover">
+				<img src="assets/img/station-cover.svg" style="width: 50%" alt="Station Cover" *ngIf="!station?.coverImage?.signedUrl">
+				<img class="station-info__cover-img" [src]="station?.coverImage?.signedUrl" alt="Station Image"
+						 *ngIf="station?.coverImage?.signedUrl">
+		</div>
+		</div>
+	</div>
+	<div class="station-info__cloud-applications cloud-applications">
+		<div class="cloud-applications__top">
+				<div class="cloud-applications__title">Cloud Applications</div>
+				<button class="button button--ghost button--disabled button--medium"
+								tooltip="Managed by Smart Infrastructure" container="body">
+						<span class="icon icon--plus icon--size-16px icon--gold mr--8"></span>
+						Add application
+				</button>
+		</div>
+		<div class="cloud-applications__list">
+				<div class="cloud-applications__list--empty" *ngIf="!cloudApplications?.length">
+						No added applications
+				</div>
+				<ng-container *ngFor="let app of cloudApplications">
+						<ng-container *ngTemplateOutlet="appView; context: {	app: app,
+																																	cloud: true,
+																																	controller: null
+																																	}"></ng-container>
+				</ng-container>
+		</div>
+	</div>
+	<div class="station__controller controller" *ngFor="let controller of controllers">
+		<div class="controller__top">
+				<div class="controller__title d-flex justify-content-between w-100">
+						<span>Controller</span>
+				</div>
+				<div class="controller__item mb--2 justify-content-start device w-100">
+						<div class="device__image">
+								<span class="icon icon--image icon--size-16px" *ngIf="!controller?.image?.signedUrl"></span>
+								<img class="device__image-img" *ngIf="controller?.image?.signedUrl"
+										 [src]="controller?.image?.signedUrl">
+						</div>
+						<div class="device__center">
+								<div class="device__info">
+										<div class="device__name">{{ controller?.name }}</div>
+										<div class="device__version mb--8">v 1.01</div>
+										<div class="device__type">Controller</div>
+								</div>
+						</div>
+				</div>
+				<div class="controller__item driver w-100">
+						<div class="driver__title mr--8">Driver:</div>
+						<button class="button button--ghost button--disabled button--small"
+										*ngIf="!controller?.driver" tooltip="Managed by Smart Infrastructure" container="body">
+								<span class="icon icon--plus icon--size-16px icon--gold mr--8"></span>
+								add driver
+						</button>
+						<div class="driver__name" *ngIf="controller?.driver">{{ controller?.driver?.name }}</div>
+						<span class="icon icon--delete icon--dynamic ml-2" *ngIf="controller?.driver"></span>
+				</div>
+		</div>
+		<div class="controller__bottom">
+				<div class="station__applications-container applications">
+						<div class="applications__top">
+								<div class="applications__title applications__title--small">
+										Applications
+								</div>
+								<button class="button button--ghost button--disabled button--medium"
+												tooltip="Managed by Smart Infrastructure" container="body">
+										<span class="icon icon--plus icon--size-16px icon--gold mr--8"></span>
+										Add application
+								</button>
+						</div>
+						<div class="applications__list-container">
+								<div class="applications__list" *ngIf="station">
+										<label class="applications__empty" *ngIf="!controller?.applications?.length">
+												No controller applications
+										</label>
+										<ng-container *ngFor="let app of controller?.applications">
+												<ng-container *ngTemplateOutlet="appView; context: {	app: app,
+																																							cloud: false,
+																																							controller: controller
+																																							}"></ng-container>
+										</ng-container>
+								</div>
+						</div>
+				</div>
+				<div class="station__devices-container devices">
+						<div class="devices__top">
+								<div class="devices__title devices__title--small">
+										Devices
+								</div>
+								<button class="button button--ghost button--medium button--disabled"
+												tooltip="Managed by Smart Infrastructure" container="body">
+										<span class="icon icon--plus icon--size-16px icon--gold mr--8"></span>
+										Add device
+								</button>
+						</div>
+						<div class="devices__list-container">
+								<div class="devices__list" *ngIf="controller?.controllerDevices?.length">
+										<div class="devices__item device"
+												 [class.device--bridge]="device?.bridgeMode"
+												 *ngFor="let device of controller?.controllerDevices">
+												<div class="device__image">
+														<span class="icon icon--image icon--size-16px"
+																	*ngIf="!device?.image?.signedUrl"></span>
+														<img class="device__image-img" *ngIf="device?.image?.signedUrl"
+																 [src]="device?.image?.signedUrl">
+												</div>
+												<div class="device__center">
+														<div class="device__info">
+																<div class="device__name">{{device.name}}</div>
+																<div class="device__version mb--8">%v 1.01%</div>
+																<div class="device__type">{{device.type?.name | titlecase}}</div>
+														</div>
+												</div>
+												<div class="device__right ml-auto">
+														<div class="device__status ml-auto"
+																 [ngClass]="device.online ? 'device__status--base-green' : 'device__status--base-red'">
+																{{ device.online ? 'Online' : 'Offline' }}
+														</div>
+												</div>
+												<span class="device__bridge" *ngIf="device.bridgeMode">Using as a Bridge</span>
+										</div>
+								</div>
+								<label class="devices__empty" *ngIf="!controller?.controllerDevices?.length">No devices</label>
+						</div>
+				</div>
+		</div>
+	</div>
+</div>
+
+<ng-template #appView
+             let-app="app"
+             let-cloud="cloud"
+             let-controller="controller">
+    <div class="application mt-2"
+         [class.cloud-applications__item]="cloud"
+         [class.applications__item]="!cloud">
+        <div class="application__top">
+            <div class="application__info">
+                <div class="application__name">{{ app?.project?.name }}</div>
+                <div class="application__version">v {{ app?.version }}</div>
+            </div>
+            <div class="application__status"
+                 [class.application__status--base-red]="app?.status !== 'RUNNING' && app?.status !== 'PENDING' && app?.status !== 'RUNNING_ANOTHER_RELEASE'"
+                 [class.application__status--base-green]="app?.status === 'RUNNING' || app?.status === 'PENDING' || app?.status === 'RUNNING_ANOTHER_RELEASE'">
+                {{ app?.status !== 'RUNNING' && app?.status !== 'PENDING' && app?.status !== 'RUNNING_ANOTHER_RELEASE' ? 'Stopped' : 'Running' }}
+            </div>
+        </div>
+        <div class="application__divider"></div>
+        <div class="d-flex flex-column w-100">
+            <div class="application__bottom">
+                <!-- <div class="application__control">
+                    <span class="icon icon--pause icon--red icon--dynamic"
+                          *ngIf="(app?.status === 'RUNNING' || app?.status === 'PENDING' || app?.status === 'RUNNING_ANOTHER_RELEASE'); else deployButton"
+                          tooltip="Stop application"
+                          container="body"></span>
+                    <ng-template #deployButton>
+                        <span class="icon icon--play icon--green icon--dynamic"
+                              tooltip="Run application"
+                              container="body"></span>
+                    </ng-template>
+								</div>
+								<div class="application__actions">
+                    <span class="icon icon--show icon--dynamic icon--disabled mr--16"
+                          [class.icon--disabled]="(app?.status !== 'RUNNING' && app?.status !== 'PENDING' && app?.status !== 'RUNNING_ANOTHER_RELEASE')"
+                          tooltip="View application"
+                          container="body"></span>
+                    <span class="icon icon--edit icon--dynamic mr--16"></span>
+                    <span class="icon icon--delete icon--dynamic"></span>
+                </div> -->
+            </div>
+            <div class="application__new-version"
+                 *ngIf="!app?.isLatest">
+                <div class="application__new-version-info">
+                    <div class="application__new-version-text">
+                        New version is ready! Let’s update
+                    </div>
+                    <button class="button button--ghost button--small">
+                        <span class="icon icon--update icon--active mr--4"></span>
+                        update
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

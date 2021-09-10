@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="35px" height="18px" viewBox="0 0 35 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+    <title>battery</title>
+    <desc>Created with Sketch.</desc>
+    <g id="CamUI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="01_Yezhik-/-01_BasePanels-/-01_01_Default" transform="translate(-1357.000000, -48.000000)">
+            <g id="Group-10" transform="translate(1287.000000, 32.000000)">
+                <g id="battery" transform="translate(70.000000, 16.000000)">
+                    <rect id="Rectangle" stroke="#FFFFFF" stroke-width="2" x="4" y="1" width="30" height="16" rx="2"></rect>
+                    <rect id="Rectangle" fill="#FFFFFF" x="0" y="4" width="4" height="11"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
